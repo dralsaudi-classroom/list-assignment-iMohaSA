@@ -54,7 +54,7 @@ public class LinkedList<T> implements List<T>{
             current = current.next;
         }
     }
-	 public T mostFrequentElement() {
+	 	 public T mostFrequentElement() {
 	    if (empty()) {
 	        return null;
 	    }
@@ -80,5 +80,6 @@ public class LinkedList<T> implements List<T>{
 	
 	    return mostFrequent;
 	}
+}
 
 }
