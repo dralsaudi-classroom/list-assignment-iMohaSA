@@ -65,32 +65,21 @@ public class DLL<T> {
             current = current.next;
     }
    public void removeBetween(T e1, T e2) {
-    DLLNode<T> startNode = head;
-    while (startNode != null && !startNode.data.equals(e1)) {
-        startNode = startNode.next;
-    }
-    
-    if (startNode == null) return;
-    
-    DLLNode<T> endNode = startNode;
-    while (endNode != null && !endNode.data.equals(e2)) {
-        endNode = endNode.next;
-    }
-    
-    if (endNode == null) return;
-    
-    DLLNode<T> currentNode = startNode.next;
-    while (currentNode != endNode) {
-        DLLNode<T> nextNode = currentNode.next;
-        if (currentNode.previous != null) {
-            currentNode.previous.next = nextNode;
-        }
-        if (nextNode != null) {
-            nextNode.previous = currentNode.previous;
-        }
-        currentNode = nextNode;
-    }
-    
-    current = head;
+	   DLLNode<T> node = head;
+	   while(node != null) {
+		   if(node.data.equals(e1)) {
+			   DLLNode<T> tmp = node.next;
+			   while(!tmp.equals(e2)) {
+				   tmp.previous.next = tmp.next;
+				   if(tmp.next != null) {
+					   tmp.next.previous = tmp.previous;
+					   tmp = tmp.next;
+				   }
+				   else { break; }
+			   }
+		   }
+		   else {
+			   node = node.next;
+		   }
    }
 }
