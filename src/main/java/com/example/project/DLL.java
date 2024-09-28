@@ -69,7 +69,7 @@ public class DLL<T> {
 	   while(node != null) {
 		   if(node.data.equals(e1)) {
 			   DLLNode<T> tmp = node.next;
-			   while(!tmp.equals(e2)) {
+			   while(tmp != null && !tmp.data.equals(e2)) {
 				   tmp.previous.next = tmp.next;
 				   if(tmp.next != null) {
 					   tmp.next.previous = tmp.previous;
