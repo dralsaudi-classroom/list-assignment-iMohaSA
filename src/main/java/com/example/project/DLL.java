@@ -1,8 +1,8 @@
 package com.example.project;
 
 public class DLL<T> {
-	private DLLNode<T> head;
-	private DLLNode<T> current;
+    public DLLNode<T> head;
+    public DLLNode<T> current;
 
     public DLL() {
         head = current = null;
@@ -52,12 +52,12 @@ public class DLL<T> {
         if(current == head) {
             head = head.next;
             if(head != null)
-               head.previous = null;
+                head.previous = null;
         }
         else {
             current.previous.next = current.next;
             if(current.next != null)
-               current.next.previous = current.previous;
+                current.next.previous = current.previous;
         }
         if(current.next == null)
             current = head;
@@ -65,15 +65,46 @@ public class DLL<T> {
             current = current.next;
     }
     public void removeBetween(T e1, T e2) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // throw new UnsupportedOperationException("Not supported yet.");
-        // Write the method removeBetween, member of the class DoubleLinkedList. The method
-        // takes two elements e1 and e2, and removes all the elements between the two elements
-        // (e1 and e2 not included). If e1 or e2 or both doesn’t exist, no element will be removed. You can assume the elements to be unique, e1 comes before e2, and that
-        // e1 ̸= e2. Current is moved to head if the removal is successful. Do not call any
-        // methods and do not use any auxiliary data structures. The method signature
-        // is: public void removeBetween(T e1, T e2).
-        // Example 3.1. Given the list: A ↔ B ↔ C ↔ D ↔ E ↔ F, removeBetween(’B’,
-        // ’E’) results in: A ↔ B ↔ E ↔ F.
+        if (empty()) {
+            return;
+        }
+
+        DLLNode<T> node = head;
+        while (node != null && !node.data.equals(e1)) {
+            node = node.next;
+        }
+
+        if (node == null || node.next == null) {
+            return;
+        }
+
+        DLLNode<T> endNode = node.next;
+        while (endNode != null && !endNode.data.equals(e2)) {
+            endNode = endNode.next;
+        }
+
+        if (endNode == null) {
+            return;
+        }
+
+        node.next = endNode;
+        endNode.previous = node;
+
+        current = head;
     }
+    public static <T> void reverseCopy(DLL<T> list1, DLL<T> list2) {
+        DLLNode<T> temp = list1.head;
+
+
+        while (temp != null && temp.next != null) {
+            temp = temp.next;
+        }
+
+
+        while (temp != null) {
+            list2.insert(temp.data);
+            temp = temp.previous;
+        }
+    }
+
 }
