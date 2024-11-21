@@ -1,8 +1,8 @@
 package com.example.project;
 
 public class DLL<T> {
-	private DLLNode<T> head;
-	private DLLNode<T> current;
+    public DLLNode<T> head;
+    public DLLNode<T> current;
 
     public DLL() {
         head = current = null;
@@ -52,45 +52,59 @@ public class DLL<T> {
         if(current == head) {
             head = head.next;
             if(head != null)
-               head.previous = null;
+                head.previous = null;
         }
         else {
             current.previous.next = current.next;
             if(current.next != null)
-               current.next.previous = current.previous;
+                current.next.previous = current.previous;
         }
         if(current.next == null)
             current = head;
         else
             current = current.next;
     }
-	   public void removeBetween(T e1, T e2) {
-	    if (empty()) {
-	        return;
-	    }
-	    
-	    DLLNode<T> node = head;
-	    while (node != null && !node.data.equals(e1)) {
-	        node = node.next;
-	    }
-	    
-	    if (node == null || node.next == null) {
-	        return;
-	    }
-	    
-	    DLLNode<T> endNode = node.next;
-	    while (endNode != null && !endNode.data.equals(e2)) {
-	        endNode = endNode.next;
-	    }
-	    
-	    if (endNode == null) {
-	        return;
-	    }
-	    
-	    node.next = endNode;
-	    endNode.previous = node;
-	    
-	    current = head;
-	}
+    public void removeBetween(T e1, T e2) {
+        if (empty()) {
+            return;
+        }
+
+        DLLNode<T> node = head;
+        while (node != null && !node.data.equals(e1)) {
+            node = node.next;
+        }
+
+        if (node == null || node.next == null) {
+            return;
+        }
+
+        DLLNode<T> endNode = node.next;
+        while (endNode != null && !endNode.data.equals(e2)) {
+            endNode = endNode.next;
+        }
+
+        if (endNode == null) {
+            return;
+        }
+
+        node.next = endNode;
+        endNode.previous = node;
+
+        current = head;
+    }
+    public static <T> void reverseCopy(DLL<T> list1, DLL<T> list2) {
+        DLLNode<T> temp = list1.head;
+
+
+        while (temp != null && temp.next != null) {
+            temp = temp.next;
+        }
+
+
+        while (temp != null) {
+            list2.insert(temp.data);
+            temp = temp.previous;
+        }
+    }
 
 }
